@@ -1,11 +1,11 @@
+<?php
+session_start();
+include 'cek.php';
+include 'config.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
-	<?php 
-	session_start();
-	include 'cek.php';
-	include 'config.php';
-	?>
 	<title>KIOS MALASNGODING</title>
 	<link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="../assets/js/jquery-ui/jquery-ui.css">
@@ -80,13 +80,15 @@
 		</div>
 
 		<div class="row"></div>
-		<ul class="nav nav-pills nav-stacked">
-			<li class="active"><a href="index.php"><span class="glyphicon glyphicon-home"></span>  Dashboard</a></li>			
-			<li><a href="barang.php"><span class="glyphicon glyphicon-briefcase"></span>  Data Barang</a></li>
-			<li><a href="barang_laku.php"><span class="glyphicon glyphicon-briefcase"></span>  Entry Penjualan</a></li>        												
-			<li><a href="ganti_foto.php"><span class="glyphicon glyphicon-picture"></span>  Ganti Foto</a></li>
-			<li><a href="ganti_pass.php"><span class="glyphicon glyphicon-lock"></span> Ganti Password</a></li>
-			<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>  Logout</a></li>			
-		</ul>
+			<ul class="nav nav-pills nav-stacked">
+				<li class="active"><a href="index.php"><span class="glyphicon glyphicon-home"></span>  Dashboard</a></li>				
+				<li><a href="barang.php"><span class="glyphicon glyphicon-briefcase"></span>  Data Barang</a></li>
+				<li><a href="barang_laku.php"><span class="glyphicon glyphicon-briefcase"></span>  Entry Penjualan</a></li>
+				<li><a href="lap_laba_rugi_form.php"><span class="glyphicon glyphicon-list-alt"></span>  Laba Rugi</a></li>
+				<li><a href="report_settings.php"><span class="glyphicon glyphicon-cog"></span>  Pengaturan Kop</a></li>
+				<li><a href="ganti_foto.php"><span class="glyphicon glyphicon-picture"></span>  Ganti Foto</a></li>
+				<li><a href="ganti_pass.php"><span class="glyphicon glyphicon-lock"></span> Ganti Password</a></li>
+				<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>  Logout</a></li>				
+			</ul>
 	</div>
 	<div class="col-md-10">

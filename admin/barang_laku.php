@@ -118,43 +118,69 @@ if(isset($_GET['tanggal'])){
 						<div class="form-group">
 							<label>Tanggal</label>
 							<input name="tgl" type="text" class="form-control" id="tgl" autocomplete="off">
-						</div>	
+						</div>
 						<div class="form-group">
-							<label>Nama Barang</label>								
-							<select class="form-control" name="nama">
-								<?php 
-								$brg=mysql_query("select * from barang");
-								while($b=mysql_fetch_array($brg)){
-									?>	
-									<option value="<?php echo $b['nama']; ?>"><?php echo $b['nama'] ?></option>
-									<?php 
-								}
-								?>
-							</select>
-
-						</div>									
-						<div class="form-group">
-							<label>Harga Jual / unit</label>
-							<input name="harga" type="text" class="form-control" placeholder="Harga" autocomplete="off">
-						</div>	
-						<div class="form-group">
-							<label>Jumlah</label>
-							<input name="jumlah" type="text" class="form-control" placeholder="Jumlah" autocomplete="off">
-						</div>																	
+							<label>Daftar Barang (bisa tambah lebih dari 1)</label>
+							<table class="table" id="items_table">
+								<thead>
+									<tr>
+										<th>Nama Barang</th>
+										<th>Harga Jual /unit</th>
+										<th>Jumlah</th>
+										<th>Aksi</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="item-row">
+										<td>
+											<select class="form-control" name="nama[]">
+												<?php 
+												$brg=mysql_query("select * from barang");
+												while($b=mysql_fetch_array($brg)){
+													?>    
+													<option value="<?php echo $b['nama']; ?>"><?php echo $b['nama'] ?></option>
+													<?php 
+												}
+												?>
+											</select>
+										</td>
+										<td><input name="harga[]" type="text" class="form-control" placeholder="Harga" autocomplete="off"></td>
+										<td><input name="jumlah[]" type="text" class="form-control" placeholder="Jumlah" autocomplete="off"></td>
+										<td><button type="button" class="btn btn-danger remove-row">Hapus</button></td>
+									</tr>
+								</tbody>
+							</table>
+							<button type="button" id="add_row" class="btn btn-default">Tambah Baris</button>
+						</div>
 
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-						<input type="reset" class="btn btn-danger" value="Reset">												
+						<input type="reset" class="btn btn-danger" value="Reset">                                                
 						<input type="submit" class="btn btn-primary" value="Simpan">
 					</div>
-				</form>
+					</form>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$("#tgl").datepicker({dateFormat : 'yy/mm/dd'});							
+			$("#tgl").datepicker({dateFormat : 'yy/mm/dd'}); 
+
+			// add/remove rows for multi-item entry
+			$('#add_row').on('click', function(){
+				var row = $('.item-row:first').clone();
+				row.find('input').val('');
+				$('#items_table tbody').append(row);
+			});
+
+			// remove row
+			$(document).on('click', '.remove-row', function(){
+				if($('#items_table tbody tr').length > 1){
+					$(this).closest('tr').remove();
+				}
+			});
+
 		});
 	</script>
 	<?php include 'footer.php'; ?>
