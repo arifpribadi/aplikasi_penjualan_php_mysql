@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $settings['email'] = $email;
 
     file_put_contents($settings_file, json_encode($settings, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-    echo "<div class='alert alert-success'>Pengaturan tersimpan.</div>";
+    $saved = true;
 }
 
 // ensure defaults exist
@@ -42,46 +42,60 @@ $defaults = array(
     'logo' => 'malasngoding.png'
 );
 $settings = array_merge($defaults, $settings);
-
 ?>
 
-<div class="col-md-10">
-    <h3><span class="glyphicon glyphicon-cog"></span>  Pengaturan Kop Surat</h3>
-    <form method="post" enctype="multipart/form-data" style="max-width:720px">
-        <div class="form-group">
-            <label>Nama Perusahaan</label>
-            <input class="form-control" name="company_name" value="<?php echo htmlspecialchars($settings['company_name']); ?>">
-        </div>
-        <div class="form-group">
-            <label>Telepon</label>
-            <input class="form-control" name="phone" value="<?php echo htmlspecialchars($settings['phone']); ?>">
-        </div>
-        <div class="form-group">
-            <label>Alamat</label>
-            <input class="form-control" name="address" value="<?php echo htmlspecialchars($settings['address']); ?>">
-        </div>
-        <div class="form-group">
-            <label>Website</label>
-            <input class="form-control" name="website" value="<?php echo htmlspecialchars($settings['website']); ?>">
-        </div>
-        <div class="form-group">
-            <label>Email</label>
-            <input class="form-control" name="email" value="<?php echo htmlspecialchars($settings['email']); ?>">
-        </div>
-        <div class="form-group">
-            <label>Logo saat ini</label>
-            <div>
-                <img src="../logo/<?php echo htmlspecialchars($settings['logo']); ?>" style="max-height:80px">
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Unggah logo (opsional)</label>
-            <input type="file" name="logo" accept="image/*">
-        </div>
-        <div class="form-group">
-            <button class="btn btn-primary">Simpan</button>
-        </div>
-    </form>
+<div class="page-header">
+	<h2>
+		<span class="page-icon">&#9881;</span>
+		Pengaturan Kop Surat
+	</h2>
+</div>
+
+<?php if(isset($saved)): ?>
+<div class="alert-modern alert-success mb-16"><span>&#10003;</span> Pengaturan berhasil disimpan!</div>
+<?php endif; ?>
+
+<div class="card" style="max-width:600px;">
+	<div class="card-header">
+		<h3>&#9881; Informasi Perusahaan</h3>
+	</div>
+	<div class="card-body">
+		<form method="post" enctype="multipart/form-data" class="form-modern">
+			<div class="form-group">
+				<label>Nama Perusahaan</label>
+				<input name="company_name" value="<?php echo htmlspecialchars($settings['company_name']); ?>">
+			</div>
+			<div class="form-group">
+				<label>Telepon</label>
+				<input name="phone" value="<?php echo htmlspecialchars($settings['phone']); ?>">
+			</div>
+			<div class="form-group">
+				<label>Alamat</label>
+				<input name="address" value="<?php echo htmlspecialchars($settings['address']); ?>">
+			</div>
+			<div class="form-group">
+				<label>Website</label>
+				<input name="website" value="<?php echo htmlspecialchars($settings['website']); ?>">
+			</div>
+			<div class="form-group">
+				<label>Email</label>
+				<input name="email" value="<?php echo htmlspecialchars($settings['email']); ?>">
+			</div>
+			<div class="form-group">
+				<label>Logo Saat Ini</label>
+				<div style="margin-top:8px; padding:12px; background:#f8fafc; border-radius:8px; border:1px solid #e2e8f0;">
+					<img src="../logo/<?php echo htmlspecialchars($settings['logo']); ?>" style="max-height:80px; max-width:200px;" onerror="this.style.display='none'">
+				</div>
+			</div>
+			<div class="form-group">
+				<label>Upload Logo Baru <span class="text-muted" style="font-weight:400;">(opsional)</span></label>
+				<input type="file" name="logo" accept="image/*" style="padding:8px; border:1.5px solid #e2e8f0; border-radius:8px; width:100%; font-family:inherit; font-size:13px;">
+			</div>
+			<div style="margin-top:8px;">
+				<button type="submit" class="btn-modern btn-primary-modern">&#10003; Simpan Pengaturan</button>
+			</div>
+		</form>
+	</div>
 </div>
 
 <?php include 'footer.php'; ?>

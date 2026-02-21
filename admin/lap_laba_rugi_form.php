@@ -2,30 +2,39 @@
 include 'header.php';
 ?>
 
-<div class="col-md-10">
-    <h3><span class="glyphicon glyphicon-list-alt"></span>  Laporan Laba Rugi</h3>
-    <a class="btn" href="barang_laku.php"><span class="glyphicon glyphicon-arrow-left"></span>  Kembali</a>
-    <hr>
-    <form action="lap_laba_rugi.php" method="get" target="_blank" class="form-horizontal" style="max-width:480px">
-        <div class="form-group">
-            <label for="dari">Dari</label>
-            <input type="text" id="dari" name="dari" class="form-control" autocomplete="off" value="<?php echo date('Y/m/d', strtotime('-30 days')); ?>">
-        </div>
-        <div class="form-group">
-            <label for="sampai">Sampai</label>
-            <input type="text" id="sampai" name="sampai" class="form-control" autocomplete="off" value="<?php echo date('Y/m/d'); ?>">
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Cetak Laporan">
-        </div>
-    </form>
-
-    <script type="text/javascript">
-    $(document).ready(function(){
-        $('#dari,#sampai').datepicker({dateFormat: 'yy/mm/dd'});
-    });
-    </script>
+<div class="page-header">
+	<h2>
+		<span class="page-icon">&#128202;</span>
+		Laporan Laba Rugi
+	</h2>
 </div>
+
+<div class="card" style="max-width:500px;">
+	<div class="card-header">
+		<h3>&#128202; Pilih Periode Laporan</h3>
+	</div>
+	<div class="card-body">
+		<form action="lap_laba_rugi.php" method="get" target="_blank" class="form-modern">
+			<div class="form-group">
+				<label>Dari Tanggal</label>
+				<input type="text" id="dari" name="dari" autocomplete="off" value="<?php echo date('Y/m/d', strtotime('-30 days')); ?>">
+			</div>
+			<div class="form-group">
+				<label>Sampai Tanggal</label>
+				<input type="text" id="sampai" name="sampai" autocomplete="off" value="<?php echo date('Y/m/d'); ?>">
+			</div>
+			<div style="margin-top:8px;">
+				<input type="submit" class="btn-modern btn-primary-modern" value="&#128438; Cetak Laporan">
+			</div>
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#dari,#sampai').datepicker({dateFormat: 'yy/mm/dd'});
+});
+</script>
 
 <?php
 include 'footer.php';
